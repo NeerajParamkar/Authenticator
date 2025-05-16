@@ -44,7 +44,6 @@ export const register =async (req,res)=>{
 
 export const login= async (req,res)=>{
   const {email,password}=req.body;
-
   if(!email || !password){
     return res.json({success:false,message:'Email or Password is required'});
   }
@@ -66,7 +65,7 @@ export const login= async (req,res)=>{
       maxAge:7*24*60*60*1000
     });
 
-    return res.json({success:true,message:"You are logged in"});
+     res.json({success:true,message:"You are logged in"});
     } catch (error) {
       res.json({success:false,message:error.message});
     }
