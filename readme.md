@@ -72,7 +72,7 @@ Frontend runs at http://localhost:5173
 
 ## 🌱 Future Improvements  
 - OAuth with Google/Facebook  
-- Two-Factor Authentication (2FA)  
+- Two-Factor Authentication(2FA) 
 - User Dashboard/Profile  
 - Logs and Analytics  
 
