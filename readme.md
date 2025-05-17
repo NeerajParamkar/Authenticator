@@ -10,7 +10,7 @@
 - ✉️ OTP sent via Email  
 
 ## 🛠️ Tech Stack  
-- **Frontend**: React  
+- **Frontend**: React ,Tailwind css 
 - **Backend**: Node.js, Express  
 - **Database**: MongoDB  
 - **Email Service**: Nodemailer (SMTP)    
@@ -23,20 +23,33 @@ git clone https://github.com/NeerajParamkar/Authenticator.git
 cd Authenticator
 ```
 2. **Set up environment variables:**
-Create a .env file inside the server/ directory with the following content:
+Create a .env file inside the server folder with the following content:
 ```bash
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
+PORT=3000
+MONGODB_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-EMAIL_USER=your_email@example.com
-EMAIL_PASS=your_email_password
+NODE_ENV=development or server 
+SMPT_USER=your_smpt_user_id
+SMPT_PASSWORD=Password
+SENDER_EMAIL=sender_email_id
 ```
-3. **Install dependencies:**
+
+Also create .env file in client folder with following content:
+
 ```bash
-cd server
-npm install
-cd ../client
-npm install
+VITE_BACKEND_URL='http://localhost:3000'
+```
+
+3. **Install dependencies:**
+
+In client folder -:
+```bash
+npm install axios react-router-dom react-toastify
+```
+
+In server folder -:
+```bash
+npm i express cors dotenv nodemon jsonwebtoken mongoose bcryptjs nodemailer cookie-parser
 ```
 
 4 .**Run the project:**
@@ -65,4 +78,3 @@ Frontend runs at http://localhost:5173
 
 ## 🤝 Contributing  
 Pull requests are welcome! Fork this repo, make your changes, and submit a PR.
-
