@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken";
 import userModule from "../modules/userModule.js";
 import transpoter from "../config/nodeMailer.js"
-
+import { EMAIL_VERIFY_TEMPLATE,PASSWORD_RESET_TEMPLATE,WELLCOME_TEMPLATE } from "../../client/config/emailTemplate.js";
 
 export const register =async (req,res)=>{
   const {name,email,password}=req.body;
@@ -31,7 +31,8 @@ export const register =async (req,res)=>{
       from:process.env.SENDER_EMAIL,
       to:email,
       subject:"Wellcome to My webpage",
-      text:`Wellcome to neeraj's website your account has been created with email id : ${email}`
+      // text:`Wellcome to neeraj's website your account has been created with email id : ${email}`
+      html:WELLCOME_TEMPLATE.replace("{{email}}",email)
     }
 
     await transpoter.sendMail(mailOptions);
@@ -95,15 +96,15 @@ export const sendVerifiedOtp= async (req,res)=>{
 
     const otp=String(Math.floor(100000+Math.random()*900000));
     user.verifyOTP=otp;
-    user.verifyOtpExpire=Date.now()+24*60*60*1000;
+    user.verifyOtpExpire=Date.now()+5*60*1000;
 
     await user.save();
-
     const mailOptions={
       from:process.env.SENDER_EMAIL,
       to:user.email,
       subject:"Account verification OTP",
-      text:`Your otp is ${otp} . Verify your account using this OTP`
+      // text:`Your otp is ${otp} . Verify your account using this OTP`
+      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email)
     }
 
     await transpoter.sendMail(mailOptions);
@@ -168,12 +169,13 @@ export const setResendOtp= async (req,res)=>{
   user.reSetOtpExpireAt=Date.now()+ 5*60*1000;
 
   await user.save();
-
     const mailOptions={
       from:process.env.SENDER_EMAIL,
       to:user.email,
       subject:"Password Reset OTP",
-      text:`Your otp for resetting your password is  ${otp} . Use this otp to process with resetting your password.`
+      // text:`Your otp for resetting your password is  ${otp} . Use this otp to process with resetting your password.`
+      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email)
+
     }
 
     await transpoter.sendMail(mailOptions);
@@ -186,7 +188,17 @@ export const setResendOtp= async (req,res)=>{
   
   
 }
-
+export const checkOtp=async (req,res)=>{
+  const {email,otp}=req.body;
+  const user=await userModule.findOne({email});
+  if(user.reSetOtp ==="" || user.reSetOtp!==otp){
+      return res.json({success:false,message:"Invalid OTP"})
+    }else if(user.reSetOtpExpireAt<Date.now()){
+      return res.json({success:false,message:"OTP Expired"})
+    }else{
+    return res.json({success:true,message:"correct OTP"}); 
+    }
+}
 export const resetPassword=async (req,res)=>{
   const {email,otp,newPassword}=req.body;
   if(!email || !otp || !newPassword){

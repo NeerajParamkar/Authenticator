@@ -9,12 +9,12 @@ const app=express();
 
 const allowedOrigin=['http://localhost:5173']
 
-app.use(express.json());
-app.use(cookieParser());
+
 app.use(cors({origin:allowedOrigin,credentials:true}));
 connectDB(); //Database connected/
-
-
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true })); 
 app.get('/',(req,res)=>{
   res.send("Hello their");
 })
