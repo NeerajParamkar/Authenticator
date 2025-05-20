@@ -7,7 +7,7 @@ import authRouter from "./Routes/authRoutes.js";
 import userRouter from "./Routes/usersRoutes.js";
 const app=express();
 
-const allowedOrigin=['http://localhost:5173']
+const allowedOrigin=['http://localhost:5173','https://authenticator-m3jc-o1to8pwkl-neeraj-paramkars-projects.vercel.app/']
 
 
 app.use(cors({origin:allowedOrigin,credentials:true}));
