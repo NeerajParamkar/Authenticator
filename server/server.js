@@ -7,7 +7,7 @@ import authRouter from "./Routes/authRoutes.js";
 import userRouter from "./Routes/usersRoutes.js";
 const app=express();
 
-const allowedOrigin=['https://authenticator-swart.vercel.app/']
+const allowedOrigin=[process.env.AllOW_LINK]
 
 
 app.use(cors({origin:allowedOrigin,credentials:true}));
