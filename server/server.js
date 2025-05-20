@@ -7,7 +7,7 @@ import authRouter from "./Routes/authRoutes.js";
 import userRouter from "./Routes/usersRoutes.js";
 const app=express();
 
-const allowedOrigin=['http://localhost:5173','https://authenticator-pi.vercel.app/']
+const allowedOrigin=['https://authenticator-pi.vercel.app/']
 
 
 app.use(cors({origin:allowedOrigin,credentials:true}));
