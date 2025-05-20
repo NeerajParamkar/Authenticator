@@ -10,7 +10,7 @@ const app=express();
 const allowedOrigin=[process.env.AllOW_LINK]
 
 
-app.use(cors({origin:allowedOrigin,credentials:true}));
+app.use(cors({origin:allowedOrigin[0],credentials:true}));
 connectDB(); //Database connected/
 app.use(express.json());
 app.use(cookieParser());
