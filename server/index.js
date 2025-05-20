@@ -10,7 +10,7 @@ const app=express();
 // const allowedOrigin=[process.env.AllOW_LINK]
 
 
-app.use(cors({origin:["https://authenticator-swart.vercel.app"],methods:["POST","GET"],credentials:true}));
+app.use(cors({origin:["https://authenticator-black-eight.vercel.app/"],methods:["POST","GET"],credentials:true}));
 connectDB(); //Database connected/
 app.use(express.json());
 app.use(cookieParser());
