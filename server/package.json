@@ -8,9 +8,11 @@
   "main": "server.js",
 
   "scripts": {
-    "start": "node server.js",
-    "dev":"nodemon server.js"
-  },
+  "start": "node server.js",
+  "dev": "nodemon server.js",
+  "build": "cd client && npm install && npm run build"
+}
+,
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
