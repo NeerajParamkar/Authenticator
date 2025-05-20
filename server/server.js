@@ -7,10 +7,10 @@ import authRouter from "./Routes/authRoutes.js";
 import userRouter from "./Routes/usersRoutes.js";
 const app=express();
 
-const allowedOrigin=[process.env.AllOW_LINK]
+// const allowedOrigin=[process.env.AllOW_LINK]
 
 
-app.use(cors({origin:allowedOrigin[0],credentials:true}));
+app.use(cors({origin:["https://authenticator-swart.vercel.app"],methods:["POST","GET"],credentials:true}));
 connectDB(); //Database connected/
 app.use(express.json());
 app.use(cookieParser());
